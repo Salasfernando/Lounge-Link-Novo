@@ -34,6 +34,8 @@
     <!-- Preconnect to Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
     
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='75' font-size='75' font-family='Playfair Display' font-weight='bold' fill='%231F4F4F'>L</text></svg>" />
@@ -58,10 +60,18 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
-    <script
-      defer
-      src="%VITE_ANALYTICS_ENDPOINT%/umami"
-      data-website-id="%VITE_ANALYTICS_WEBSITE_ID%"></script>
+    <script type="module">
+      // Carrega o script de analytics apenas se as variáveis de ambiente estiverem definidas
+      const analyticsEndpoint = import.meta.env.VITE_ANALYTICS_ENDPOINT;
+      const analyticsSiteId = import.meta.env.VITE_ANALYTICS_WEBSITE_ID;
+      if (analyticsEndpoint && analyticsSiteId) {
+        const s = document.createElement('script');
+        s.defer = true;
+        s.src = `${analyticsEndpoint.replace(/\/$/, '')}/umami`;
+        s.setAttribute('data-website-id', analyticsSiteId);
+        document.head.appendChild(s);
+      }
+    </script>
     
     <!-- Structured Data / Schema.org -->
     <script type="application/ld+json">
