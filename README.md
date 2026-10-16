@@ -18,6 +18,8 @@
     <a href="https://instagram.com/loungeodontologia">Instagram</a>
     ·
     <a href="https://wa.me/5561996263616">Agendar pelo WhatsApp</a>
+    .
+    <a href="https://loungeodontologia.vercel.app/">Acessar links</a>
   </p>
 
 </div>
